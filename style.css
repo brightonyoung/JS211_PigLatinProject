@@ -1,0 +1,66 @@
+body {
+    margin: auto;
+    justify-content: center;
+}
+
+.middle {
+    width: 400px;
+    margin: auto;
+    text-align: center;
+    color: black;
+    justify-content: center;
+}
+
+.button {
+    width: 150px;
+    margin: auto;
+    padding-top: 70vh;
+}
+
+.button button {
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-size: 30px;
+    transition: 0.3s;
+    border: solid black;
+    border-radius: 10px;
+    padding: 10px;
+    padding-top: 12px;
+}
+
+button:hover {
+    border: solid grey;
+}
+
+.left {
+    float: left;
+    width: 300px;
+    margin-left: 100px;
+    margin-top: 200px;
+}
+
+.left textarea {
+    text-align: center;
+    width: 400px;
+    height: 200px;
+    resize: none;
+    padding-top: 20px;
+}
+
+.right {
+    float: right;
+    margin-top: 200px;
+    width: 300px;
+    margin-right: 205px;
+}
+
+#translated {
+    text-align: center;
+    width: 400px;
+    height: 200px;
+    resize: none;
+    padding-top: 20px;
+}
