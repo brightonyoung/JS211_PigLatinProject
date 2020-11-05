@@ -1,79 +1,84 @@
-'use strict';
+const pigLatin = (word) => {
+  word = document.getElementById("textInput").value.trim();
+  let words = word.split(" ")
+  let vowels = ["a", "e", "i", "o", "u"]
+  document.getElementById("translated").innerHTML = "";
 
+  for (let i = 0; i < words.length; i++) {
+    let letters = words[i].split('');
 
-const assert = require('assert');
-const readline = require('readline');
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+    if (vowels .includes(letters[0]) == true) {
+      letters.push('yay');
+      letters = letters.join('');
+      document.getElementById("translated").innerHTML += letters + " ";
 
+    } else if (vowels .includes(letters[1]) == false) {
+      let x = letters.splice(0, 2);
+      x = x.join('');
+      letters.push(x);
+      letters.push('ay');
+      letters = letters.join('');
+      document.getElementById("translated").innerHTML += letters + " ";
 
-function pigLatin(word) {
-  word = word.toLowerCase();
-
-  var sa = word.search('a')
-  var se = word.search('e')
-  var si = word.search('i')
-  var so = word.search('o')
-  var su = word.search('u')
-
-  var lowestVowel = word.length
-
-  if (sa < lowestVowel && sa != -1){
-    lowestVowel = sa;
+    } else {
+      let x = letters.shift();
+      letters.push(x);
+      letters.push('ay');
+      letters = letters.join('');
+      document.getElementById("translated").innerHTML += letters + " ";
+    }
   }
-  if (se < lowestVowel && se != -1){
-    lowestVowel = se;
-  }
-  if (si < lowestVowel && si != -1){
-    lowestVowel = si;
-  }
-  if (so < lowestVowel && so != -1){
-    lowestVowel = so;
-  }
-  if (su < lowestVowel && su != -1){
-    lowestVowel = su;
-  }
-  if (lowestVowel === 0){
-    return word + 'yay';
-  }
-  return word.slice(lowestVowel) + word.slice(0, lowestVowel) + 'ay';
-
 }
 
+// the first function called in the program to get an input from the user
+// to run the function use the command: node main.js
+// to close it ctrl + C
+// const getPrompt = () => {
+//   rl.question('word ', (answer) => {
+//     console.log( pigLatin(answer) );
+//     getPrompt();
+//   });
+// }
 
-function getPrompt() {
-  rl.question('word ', (answer) => {
-    console.log( pigLatin(answer) );
-    getPrompt();
-  });
-}
+// // Unit Tests
+// // You use them run the command: npm test main.js
+// // to close them ctrl + C
+// if (typeof describe === 'function') {
 
-// Tests
+//   describe('#pigLatin()', () => {
+//     it('should translate a simple word', () => {
+//       assert.equal(pigLatin('car'), 'arcay');
+//       assert.equal(pigLatin('dog'), 'ogday');
+//     });
+//     it('should translate a complex word', () => {
+//       assert.equal(pigLatin('create'), 'eatecray');
+//       assert.equal(pigLatin('valley'), 'alleyvay');
+//     });
+//     it('should attach "yay" if word begins with vowel', () => {
+//       assert.equal(pigLatin('egg'), 'eggyay');
+//       assert.equal(pigLatin('emission'), 'emissionyay');
+//     });
+//     it('should lowercase and trim word before translation', () => {
+//       assert.equal(pigLatin('HeLlO '), 'ellohay');
+//       assert.equal(pigLatin(' RoCkEt'), 'ocketray');
+//     });
+//   });
+// } else {
 
-if (typeof describe === 'function') {
+//   getPrompt();
 
-  describe('#pigLatin()', () => {
-    it('should translate a simple word', () => {
-      assert.equal(pigLatin('car'), 'arcay');
-      assert.equal(pigLatin('dog'), 'ogday');
-    });
-    it('should translate a complex word', () => {
-      assert.equal(pigLatin('create'), 'eatecray');
-      assert.equal(pigLatin('valley'), 'alleyvay');
-    });
-    it('should attach "yay" if word begins with vowel', () => {
-      assert.equal(pigLatin('egg'), 'eggyay');
-      assert.equal(pigLatin('emission'), 'emissionyay');
-    });
-    it('should auto lowercase word before translation', () => {
-      assert.equal(pigLatin('HeLlO'), 'ellohay');
-      assert.equal(pigLatin('RoCkEt'), 'ocketray');
-    });
-  });
-} else {
+// }
 
-  getPrompt();
 
-}
+
+
+
+
+// **********
+//   HINTS
+// **********
+
+// break your code into pieces and focus on one piece at a time...
+// 1. if word begins with a vowel send to one function: adds "yay"
+// 2. if word begins in with a consonant send to another function: splices off beginning, returns word with new ending.
+// 3. if multiple words, create array of words, loop over them, sending them to different functions and creating a new array with the new words.
